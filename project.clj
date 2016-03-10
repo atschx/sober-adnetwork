@@ -12,6 +12,10 @@
                  [hiccup "1.0.5"]
                  [ring "1.4.0"]
                  [ring-server "0.4.0"]
+                 
+                 ;;
+                 [org.slf4j/slf4j-log4j12 "1.7.2"]
+                 [log4j/log4j "1.2.17"]
                  ]
   :plugins [[lein-ring "0.9.7"]]
   :ring {:handler sober-adnetwork.handler/app
