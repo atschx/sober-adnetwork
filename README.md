@@ -1,6 +1,6 @@
 # sober-adnetwork
 
-FIXME
+a network of advertiser and publisher
 
 ## Prerequisites
 
