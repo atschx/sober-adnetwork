@@ -1,5 +1,7 @@
 (ns sober-adnetwork.models.schema
-  (:require [clojure.java.jdbc :as jdbc]))
+  (:require
+    [sober-adnetwork.models.db :as db] 
+    [clojure.java.jdbc :as jdbc]))
 
 
 (defn create-users
@@ -83,18 +85,18 @@
 
 (defn create-schema-adnetwork
   "make adnertwork schema"
-  [db]
+  [db-connection]
   (jdbc/db-do-commands 
-        db
+        db-connection
         (create-users)
         (create-offers)
         (create-offer-apply-list)))
 
 (defn drop-schema-adnetwork
   "Drop adnetwork schema"
-  [db-spec]
+  [db-connection]
   (jdbc/db-do-commands 
-	  (db-connection)
+    db-connection
 	  (jdbc/drop-table-ddl :users)
 	  (jdbc/drop-table-ddl :offers)
 	  (jdbc/drop-table-ddl :offer_apply_list)
@@ -103,10 +105,15 @@
 
 (defn make-demo-data
   "make demo data for adnetwork"
-  [db]
+  [db-connection]
   (jdbc/insert! 
-     db
+     db-connection
      :users
      [:first_name :last_name :email :mobile :incharge :created_by :updated_by]
+     ["admin" "admin" "admin@atschx.com" "13800000000" nil 10000 10000]
+     ["admin" "admin" "admin@atschx.com" "13800000000" nil 10000 10000]
+     ["admin" "admin" "admin@atschx.com" "13800000000" nil 10000 10000]
+     ["admin" "admin" "admin@atschx.com" "13800000000" nil 10000 10000]
+     ["admin" "admin" "admin@atschx.com" "13800000000" nil 10000 10000]
      ["admin" "admin" "admin@atschx.com" "13800000000" nil 10000 10000]
      ["albert" "sun" "atschx@gmail.com" "1580000000" 10000 10001 10001]))

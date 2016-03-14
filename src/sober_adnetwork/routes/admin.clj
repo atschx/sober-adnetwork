@@ -1,11 +1,21 @@
 (ns sober-adnetwork.routes.admin
   (:require 
     [compojure.core :refer :all]
+    [ring.util.response :as resp]
+    [sober-adnetwork.models.users :as u]
     [sober-adnetwork.views.admin 
-     [settings :as settings]]))
+     [settings :as settings]
+     [users :as users]
+     [offers :as offers]
+     ]))
 
 (defroutes admin-routes
-  (GET "/admin" [] (settings/default-settings)))
+  (GET "/admin" [] (settings/default-settings))
+  (GET "/admin/users" [] (users/user-list))
+  (GET "/admin/:id/delete" [id]
+    (do (u/delete id)
+        (resp/redirect "/admin/users")))
+  (GET "/admin/offers" [] (offers/offer-list)))
   
 ;  (GET "/admin" [] (views/admin-blog-page))
 ;  (GET "/admin/add" [] (views/add-post))

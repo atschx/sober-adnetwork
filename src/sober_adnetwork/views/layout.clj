@@ -33,5 +33,17 @@
        [:li {} [:a {:shape "rect", :href "/dashboard"} "Dashboard"]]
        [:li {} [:a {:shape "rect", :href "/advertiser"} "Advertiser"]]
        [:li {} [:a {:shape "rect", :href "/publisher"} "Publisher"]]
-       [:li {} [:a {:shape "rect", :href "/admin"} "Admin"]]]]]]]
+       [:li {:class "dropdown" } 
+        [:a {:class "dropdown-toggle" :shape "rect", :href "#" :data-toggle "dropdown"} "Admin"]
+        [:ul {:class "dropdown-menu"}
+         [:li {} [:a {:shape "rect", :href "/admin/users"} "用户管理"]]
+         [:li {} [:a {:shape "rect", :href "/admin/offers"} "offer审核"]]
+         [:li {} [:a {:shape "rect", :href "/admin"} "系统设置"]]
+         ]]
+       ]
+      [:ul {:class "nav navbar-nav pull-right"}
+       [:li {} [:a {:shape "rect", :href "/dashboard"} "atschx@gmail.com"]]
+       [:li {:class "divider-vertical"}]
+       [:li {} [:a {:shape "rect", :href "/admin"} "Sign out"]]]
+      ]]]]
   )
