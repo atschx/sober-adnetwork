@@ -1,10 +1,10 @@
-(ns sober-adnetwork.views.advertiser.offer
+(ns sober-adnetwork.views.admin.settings
   (:use [hiccup.page :refer :all])
   (:require 
     [sober-adnetwork.views.layout :as layout]))
 
-(defn offer-list []
-  (layout/common "advertiser (chartpage.js)"
+(defn default-settings []
+  (layout/common "settings"
     (layout/nav-bar)
     [:div {:class "container"}
      [:div {:class "content"}

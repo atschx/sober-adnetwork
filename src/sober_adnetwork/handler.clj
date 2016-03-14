@@ -12,9 +12,9 @@
             [sober-adnetwork.routes 
              [home :refer [home-routes]]
              [dashboard :refer [dashboard-routes]]
-;             [advertiser :refer [advertiser-routes]]
-;             [publisher :refer [publisher-routes]]
-;             [admin :refer [admin-routes]]
+             [advertiser :refer [advertiser-routes]]
+             [publisher :refer [publisher-routes]]
+             [admin :refer [admin-routes]]
              ]))
 
 (defn init []
@@ -53,7 +53,13 @@
   (route/not-found "Not Found"))
 
 (def app
-  (-> (routes home-routes dashboard-routes app-routes)
+  (-> (routes 
+        home-routes 
+        dashboard-routes  
+        advertiser-routes 
+        publisher-routes
+        admin-routes
+        app-routes)
       (handler/site)
       (wrap-base-url)))
 

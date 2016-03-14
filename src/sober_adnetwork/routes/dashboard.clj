@@ -1,5 +1,4 @@
 (ns sober-adnetwork.routes.dashboard
-  (:use [hiccup.page :refer :all])
   (:require 
     [compojure.core :refer :all]
     [sober-adnetwork.views.dashboard :as dash]))

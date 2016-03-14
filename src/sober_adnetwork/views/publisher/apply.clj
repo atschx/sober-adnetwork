@@ -1,10 +1,10 @@
-(ns sober-adnetwork.views.advertiser.offer
+(ns sober-adnetwork.views.publisher.apply
   (:use [hiccup.page :refer :all])
   (:require 
     [sober-adnetwork.views.layout :as layout]))
 
-(defn offer-list []
-  (layout/common "advertiser (chartpage.js)"
+(defn offer-apply-list []
+  (layout/common "my-apply-list"
     (layout/nav-bar)
     [:div {:class "container"}
      [:div {:class "content"}
