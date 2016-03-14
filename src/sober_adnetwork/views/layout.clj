@@ -10,14 +10,14 @@
      [:meta {:name "description", :content "a network of publisher and advertiser"}] 
      [:meta {:name "author", :content "albert"}]
      [:title (format "sober-adnetwork:%s" title)]
-     (include-css "/css/bootstrap.min.css" "/css/crud.css")
+     (include-css "/css/bootstrap.min.css" "/css/sober.css")
      (include-js "/js/json2.js" "/js/xpath.js" "/js/Chart.js")]
     [:body content
      [:div {:class "container"}
       [:hr {}] 
       [:footer {} 
        [:p {} "© atschx.com 2016"]]]
-     (include-js "/js/jquery.js" "/js/bootstrap.min.js" "/js/crud.js")]))
+     (include-js "/js/jquery.js" "/js/bootstrap.min.js" "/js/sober.js")]))
 
 (defn nav-bar []
   [:div

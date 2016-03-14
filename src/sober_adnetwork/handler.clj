@@ -4,6 +4,7 @@
             [clojure.tools.logging :as log]
             [ring.middleware.resource :refer [wrap-resource]]
             [ring.middleware.file-info :refer [wrap-file-info]]
+            [ring.middleware.basic-authentication :refer :all]
             [hiccup.middleware :refer [wrap-base-url]]
             ;;
             [compojure.handler :as handler]
@@ -23,10 +24,10 @@
 (defn destroy []
   (log/info "sober-adnetwork is shutting down"))
 
-;(defn authenticated? [name pass]
-;  (and (= name "kurt")
-;       (= pass "mess")))
-;
+(defn authenticated? [name pass]
+  (and (= name "admin")
+       (= pass "admin123")))
+
 ;(defroutes public-routes
 ;           (GET "/" [] (views/main-page))
 ;           (GET "/show/:id" [id] (views/show-post id))
@@ -58,7 +59,7 @@
         dashboard-routes  
         advertiser-routes 
         publisher-routes
-        admin-routes
+        (wrap-basic-authentication admin-routes authenticated?)
         app-routes)
       (handler/site)
       (wrap-base-url)))

@@ -17,6 +17,8 @@
                  [ring-server "0.4.0"]
                  [compojure "1.5.0"]
                  
+                 [ring-basic-authentication "1.0.5"]
+                 
                  ;;log4j
                  [org.slf4j/slf4j-log4j12 "1.7.2"]
                  [log4j/log4j "1.2.17"]]
