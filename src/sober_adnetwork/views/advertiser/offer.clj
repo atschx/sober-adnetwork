@@ -25,7 +25,9 @@
           [:td {} name]
           [:td {} cover]
           [:td {} price]
-          [:td {} price_model]
+          [:td {}
+           [:span {:class "label label-info"} price_model]
+           ]
           [:td {} clearing_cycle]
           [:td {}
            ;;逻辑 判定
@@ -98,7 +100,30 @@
                       (f/hidden-field "advertiser_id" "10000")
                       [:div {:class "form-group"}
                        (f/label {:class "col-sm-2 control-label"} "name" "名称")
-                       [:div {:class "col-sm-10"} (f/text-field {:class "form-control"} "name")]]
+                       [:div {:class "col-sm-10"} (f/text-field {:class "form-control" :placeholder "请输入 offer 名称" :autofocus "autofocus"} "name")]]
+                      [:div {:class "form-group"}
+                       (f/label {:class "col-sm-2 control-label"} "price" "价格")
+                       [:div {:class "col-sm-10"} [:input {:class "form-control" :name "price" :type "number" :placeholder "人民币计价"}]]]
+                      [:div {:class "form-group"}
+                       (f/label {:class "col-sm-2 control-label"} "price_model" "计价模式")
+                       [:div {:class "col-sm-10"} 
+                        [:lable {:class "radio-inline" :for "price_model_1"} 
+                         [:input {:type "radio" :name "price_model" :value "CPA" :id "price_model_1" :checked "checked"}]"CPA"
+                         ]
+                        [:lable {:class "radio-inline" :for "price_model_2"} 
+                         [:input {:type "radio" :name "price_model" :value "CPS" :id "price_model_2"}]"CPS"
+                         ]
+                        ]]
+                      [:div {:class "form-group"}
+                       (f/label {:class "col-sm-2 control-label"} "clearing_cycle" "结算周期")
+                       [:div {:class "col-sm-10"} 
+                        [:lable {:class "radio-inline" :for "clearing_cycle_1"} 
+                         [:input {:type "radio" :name "clearing_cycle" :value "WEEK" :id "clearing_cycle_1" :checked "checked"}]"周结"
+                         ]
+                        [:lable {:class "radio-inline" :for "clearing_cycle_2"} 
+                         [:input {:type "radio" :name "clearing_cycle" :value "CPS" :id "clearing_cycle_2"}]"月结"
+                         ]
+                        ]]
                       [:div {:class "form-group"}
                        (f/label {:class "col-sm-2 control-label"} "eff_desc" "有效定义")
                        [:div {:class "col-sm-10"} (f/text-area {:rows 3 :class "form-control"} "eff_desc")]]

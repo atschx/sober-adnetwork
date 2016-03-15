@@ -1,4 +1,4 @@
-.post-div{
-    height: 100px;
-    overflow: hidden;
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
 }
