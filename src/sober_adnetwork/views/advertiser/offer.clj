@@ -3,6 +3,9 @@
   (:require 
     [sober-adnetwork.views.layout :as layout]
     [sober-adnetwork.models.offers :as offers]
+    ;;处理表单信息
+    [hiccup.core :refer (html)]
+    [hiccup.form :as f]
     ))
 
 (defn offer-table-item [offer]
@@ -18,7 +21,7 @@
         updated_at (:updated_at offer)]
      [:tr {} 
           [:td {} 
-           [:a {:href (str "/offer/" id "/edit") :class "btn btn-info btn-xs" :role "button"} "id" ]]
+           [:a {:href (str "/offer/" id "/edit") } id ]]
           [:td {} name]
           [:td {} cover]
           [:td {} price]
@@ -31,6 +34,9 @@
           [:td {} replay]
           [:td {} eff_desc]
           [:td {} updated_at]
+          [:td {} 
+           [:a {:href (str "/offer/" id "/delete") :class "btn btn-danger btn-xs" :role "button"} "删除" ]
+          ]
           ]))  
 
 (defn offer-list [advertiser-id]
@@ -43,6 +49,11 @@
         [:h2 "我创建的 offer"]
        ]
       ]]
+     [:div {:class "row"} 
+      [:button {:type "button" :class "btn btn-default btn-sm" :id "addOffer"}
+       [:span {:class "glyphicon glyphicon-plus" :aria-hidden "true"} "新建"]]
+      ]
+     [:br]
      [:div {:class "row"}
       [:div {:class "span12"}
        [:table {:class "table table-striped table-hover table-bordered "}
@@ -58,6 +69,7 @@
           [:th {} "管理员回复"]
           [:th {} "有效定义"]
           [:th {} "最后更新"]
+          [:th {} "更多操作"]
           ]
          ]
         [:tbody {} 
@@ -65,5 +77,35 @@
          ]
         ]]]
      ]
-;    (include-js "/js/chartpage.js"))
+;    (include-js "/js/offer.js")
   ))
+
+(defn add-offer [] 
+  (layout/common  "create new offer"
+    (layout/nav-bar)
+    [:div {:class "container"}
+     [:div {:class "row"}
+      [:div {:class "span12"} 
+			    [:div {:class "page-header"}
+				    [:h2 "创建新 offer"]
+			    ]
+		    ]]
+     [:div {:class "row"}
+       [:div {:class "col-lg-6"}
+       (list
+           (f/form-to {:class "form-horizontal" :role "form"} 
+                      [:post "/offer/create"]
+                      (f/hidden-field "advertiser_id" "10000")
+                      [:div {:class "form-group"}
+                       (f/label {:class "col-sm-2 control-label"} "name" "名称")
+                       [:div {:class "col-sm-10"} (f/text-field {:class "form-control"} "name")]]
+                      [:div {:class "form-group"}
+                       (f/label {:class "col-sm-2 control-label"} "eff_desc" "有效定义")
+                       [:div {:class "col-sm-10"} (f/text-area {:rows 3 :class "form-control"} "eff_desc")]]
+                      [:div {:class "form-group"}
+                       [:div {:class "col-sm-offset-2 col-sm-10"}
+                      (f/submit-button {:class "btn btn-primary"} "保 存")]]
+                      )
+           )]]
+     ])
+  )

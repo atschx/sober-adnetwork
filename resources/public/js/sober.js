@@ -7,3 +7,7 @@ $('ul.nav a').filter(function() {
     return this.href == url;
 }).parent().addClass('active');
 
+// button 
+$('#addOffer').on('click', function () {
+    window.location.href ="offer/add";
+})
