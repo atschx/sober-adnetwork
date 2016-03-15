@@ -13,8 +13,12 @@
   (GET "/admin" [] (settings/default-settings))
   (GET "/admin/users" [] (users/user-list))
   (GET "/admin/:id/delete" [id]
-    (do (u/delete id)
-        (resp/redirect "/admin/users")))
+       (do (u/delete id)
+         (resp/redirect "/admin/users")))
+  (GET "/admin/:id/edit" [id] (users/user-edit id))
+  (POST "/admin/:id/save" [& params]
+        (do (u/update-user params)
+          (resp/redirect "/admin/users")))
   (GET "/admin/offers" [] (offers/offer-list)))
   
 ;  (GET "/admin" [] (views/admin-blog-page))

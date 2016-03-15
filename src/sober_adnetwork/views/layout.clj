@@ -34,7 +34,8 @@
        [:li {} [:a {:shape "rect", :href "/advertiser"} "Advertiser"]]
        [:li {} [:a {:shape "rect", :href "/publisher"} "Publisher"]]
        [:li {:class "dropdown" } 
-        [:a {:class "dropdown-toggle" :shape "rect", :href "#" :data-toggle "dropdown"} "Admin"]
+        [:a {:class "dropdown-toggle" :shape "rect", :href "#" :data-toggle "dropdown"} 
+         "Admin" [:span {:class "caret"}] ]
         [:ul {:class "dropdown-menu"}
          [:li {} [:a {:shape "rect", :href "/admin/users"} "用户管理"]]
          [:li {} [:a {:shape "rect", :href "/admin/offers"} "offer审核"]]
@@ -47,3 +48,7 @@
        [:li {} [:a {:shape "rect", :href "/admin"} "Sign out"]]]
       ]]]]
   )
+
+
+(defn pagenation []
+  [:div {} ])

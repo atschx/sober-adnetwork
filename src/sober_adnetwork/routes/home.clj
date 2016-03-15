@@ -9,7 +9,7 @@
           (layout/nav-bar)
           [:div {:class "container"}
            [:div {:class "jumbotron"}
-               [:h1 {} "Sober,Adnetwork"]
+               [:h1 {} "Sober Adnetwork"]
                [:p {} "Advertisers use keywords to target the consumers they want while publishers earn more money by selling their traffic to the highest bidders.."]
                [:p {} [:a {:class "btn btn-primary btn-lg" :href "#" :role "button"} "Learn more"]]
                ]]
