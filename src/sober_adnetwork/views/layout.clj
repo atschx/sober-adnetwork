@@ -18,7 +18,7 @@
      [:div {:class "container"}
       [:hr {}] 
       [:footer {} 
-       [:p {} "©2016 atschx.com"]]]
+       [:p {} "©2016 cia.im"]]]
      (include-js "/js/jquery.js" "/js/bootstrap.min.js" "/js/sober.js")]))
 
 (defn common [title & content]
@@ -36,7 +36,7 @@
      [:div {:class "container"}
       [:hr {}] 
       [:footer {} 
-       [:p {} "©2016 atschx.com"]]]
+       [:p {} "©2016 cia.im"]]]
      (include-js "/js/jquery.js" "/js/bootstrap.min.js" "/js/sober.js")]))
 
 ;;用户登录之后的导航栏
@@ -63,8 +63,8 @@
         "管理后台" [:span {:class "caret"}] ]
        [:ul {:class "dropdown-menu"}
         [:li {} [:a {:href "/users"} "用户管理"]]
-        [:li {} [:a {:href "/admin/offers"} "offer审核"]]
-        [:li {} [:a {:href "/admin"} "系统设置"]]
+        [:li {} [:a {:href "/offers"} "offer审核"]]
+        [:li {} [:a {:href "/settings"} "系统设置"]]
         ]]
       ]
      [:ul {:class "nav navbar-nav pull-right"}

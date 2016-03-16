@@ -7,6 +7,7 @@
     [hiccup.core :refer (html)]
     [hiccup.form :as f]
     [noir.util.anti-forgery :as anti-forgery]
+    [noir.session :as session]
     ))
 
 (defn offer-table-item [offer]
@@ -100,7 +101,7 @@
            (f/form-to {:class "form-horizontal" :role "form"} 
                       [:post "/offer/create"]
                       (anti-forgery/anti-forgery-field)
-                      (f/hidden-field "advertiser_id" "10000")
+                      (f/hidden-field "advertiser_id" (session/get :uid))
                       [:div {:class "form-group"}
                        (f/label {:class "col-sm-2 control-label"} "name" "名称")
                        [:div {:class "col-sm-10"} (f/text-field {:class "form-control" :placeholder "请输入 offer 名称" :autofocus "autofocus"} "name")]]

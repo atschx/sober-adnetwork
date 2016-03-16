@@ -41,8 +41,8 @@
            ]
           [:td {} updated_at]
           [:td {} 
-           [:a {:href (str "/admin/" id "/edit") :class "btn btn-info btn-xs" :role "button"} "编辑" ]
-           [:a {:href (str "/admin/" id "/delete") :class "btn btn-danger btn-xs" :role "button"} "删除" ]
+           [:a {:href (str "/user/" id "/edit") :class "btn btn-info btn-xs" :role "button"} "编辑" ]
+           [:a {:href (str "/user/" id "/delete") :class "btn btn-danger btn-xs" :role "button"} "删除" ]
            ]
           ]))
 
