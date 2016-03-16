@@ -7,10 +7,17 @@
   (layout/common "dashboard (chartpage.js)"
     (layout/nav-bar)
     [:div {:class "container"}
+     [:div {:class "row"}
+      [:div {:class "span12"} 
+			    [:div {:class "page-header"}
+				    [:h2 "仪表盘"]
+			    ]
+		    ]]
+     [:div {:class "row"}
      [:div {:class "content"}
-      [:h1 "chart (chartjs)"]
-      [:div {:class "col-6 col-sm-6 col-lg-4"} [:canvas {:id "myChart1"}] [:hr]]
-      [:div {:class "col-6 col-sm-6 col-lg-4"} [:canvas {:id "myChart2"}] [:hr]]
-      [:div {:class "col-6 col-sm-6 col-lg-4"} [:canvas {:id "myChart3"}] [:hr]]
+      [:div {:class "col-6 col-sm-6 col-lg-4"} [:canvas {:id "myChart1"}]]
+      [:div {:class "col-6 col-sm-6 col-lg-4"} [:canvas {:id "myChart2"}]]
+      [:div {:class "col-6 col-sm-6 col-lg-4"} [:canvas {:id "myChart3"}]]
       ]]
+     ]
     (include-js "/js/chartpage.js")))

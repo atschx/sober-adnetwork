@@ -6,6 +6,7 @@
     ;;处理表单信息
     [hiccup.core :refer (html)]
     [hiccup.form :as f]
+    [noir.util.anti-forgery :as anti-forgery]
     ))
 
 (defn offer-table-item [offer]
@@ -48,7 +49,8 @@
      [:div {:class "row"}
       [:div {:class "span12"} 
        [:div {:class "page-header"}
-        [:h2 "我创建的 offer"]
+        [:h2 "我的 Offer 列表" 
+         [:small {} " 展示由当前广告主创建的所有 Offer"]]
        ]
       ]]
      [:div {:class "row"} 
@@ -89,7 +91,7 @@
      [:div {:class "row"}
       [:div {:class "span12"} 
 			    [:div {:class "page-header"}
-				    [:h2 "创建新 offer"]
+				    [:h2 "创建新 Offer"]
 			    ]
 		    ]]
      [:div {:class "row"}
@@ -97,6 +99,7 @@
        (list
            (f/form-to {:class "form-horizontal" :role "form"} 
                       [:post "/offer/create"]
+                      (anti-forgery/anti-forgery-field)
                       (f/hidden-field "advertiser_id" "10000")
                       [:div {:class "form-group"}
                        (f/label {:class "col-sm-2 control-label"} "name" "名称")
@@ -121,7 +124,7 @@
                          [:input {:type "radio" :name "clearing_cycle" :value "WEEK" :id "clearing_cycle_1" :checked "checked"}]"周结"
                          ]
                         [:lable {:class "radio-inline" :for "clearing_cycle_2"} 
-                         [:input {:type "radio" :name "clearing_cycle" :value "CPS" :id "clearing_cycle_2"}]"月结"
+                         [:input {:type "radio" :name "clearing_cycle" :value "MONTH" :id "clearing_cycle_2"}]"月结"
                          ]
                         ]]
                       [:div {:class "form-group"}

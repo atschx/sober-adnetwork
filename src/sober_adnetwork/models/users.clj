@@ -18,9 +18,12 @@
 (defn get-user-by-id [id]
   (first (jdbc/query (db/db-connection) ["select * from users where id = ?" id])))
 
+(defn get-user-by-email [email]
+  (first (jdbc/query (db/db-connection) ["select * from users where email = ?" email])))
+
 (defn update-user [user]
   (let [res (jdbc/update! (db/db-connection) 
-                          :users user
+                          :users (dissoc user :__anti-forgery-token)
                           ["id = ?" (:id user)])]
     (when-not (= res [1])
       (throw (Exception.  "DB Update has not succeeded")))))

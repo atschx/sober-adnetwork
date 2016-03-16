@@ -6,11 +6,13 @@
             [ring.middleware.file-info :refer [wrap-file-info]]
             [ring.middleware.basic-authentication :refer :all]
             [hiccup.middleware :refer [wrap-base-url]]
+            [noir.util.middleware :as noir-middleware]
             ;;
             [compojure.handler :as handler]
             [compojure.route :as route]
             ;; routes
             [sober-adnetwork.routes 
+             [auth :refer [auth-routes]]
              [home :refer [home-routes]]
              [dashboard :refer [dashboard-routes]]
              [advertiser :refer [advertiser-routes]]
@@ -19,30 +21,33 @@
              ]))
 
 (defn init []
-  (log/info "sober-adnetwork is starting"))
+  (log/info "sober-adnetwork is starting ..."))
 
 (defn destroy []
-  (log/info "sober-adnetwork is shutting down"))
-
-(defn authenticated? [name pass]
-  (and (= name "admin")
-       (= pass "admin123")))
-
+  (log/info "sober-adnetwork is shutting down.."))
 
 (defroutes app-routes
   (route/resources "/")
-  home-routes 
-  (wrap-basic-authentication dashboard-routes authenticated?)
-  (wrap-basic-authentication advertiser-routes authenticated?)
-  (wrap-basic-authentication publisher-routes authenticated?)
-  (wrap-basic-authentication admin-routes authenticated?)
   (route/not-found "Not Found"))
 
-(def app
-  (-> (routes 
-        app-routes)
-      (handler/site)
-      (wrap-base-url)))
+(def app (noir-middleware/app-handler
+           [auth-routes
+            home-routes 
+					  dashboard-routes
+					  advertiser-routes
+					  publisher-routes
+					  admin-routes
+            app-routes]
+           ))
+
+;(def app
+;  (-> (routes 
+;        auth-routes
+;        home-routes 
+;        dashboard-routes
+;        app-routes)
+;      (handler/site)
+;      (wrap-base-url)))
 
 (defn -main
   [& [port]]

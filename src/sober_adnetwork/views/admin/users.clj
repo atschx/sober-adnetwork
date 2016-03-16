@@ -6,6 +6,7 @@
     ;;处理表单信息
     [hiccup.core :refer (html)]
     [hiccup.form :as f]
+    [noir.util.anti-forgery :as anti-forgery]
     ))
 
 (defn user-table-item [user]
@@ -97,6 +98,7 @@
         (let [user (users/get-user-by-id id)]
           (f/form-to {:class "form-horizontal" :role "form"} 
                      [:post "save"]
+                     (anti-forgery/anti-forgery-field)
                      [:div {:class "form-group"}
                       (f/label {:class "col-sm-2 control-label"} "email" "E-mail")
                       [:div {:class "col-sm-10"} (f/email-field {:class "form-control"} "email" (:email user))]]

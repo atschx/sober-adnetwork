@@ -6,7 +6,7 @@
 
 (defn create [params]
   (log/info (str params))
-  (jdbc/insert! (db/db-connection) :offers params))
+  (jdbc/insert! (db/db-connection) :offers (dissoc params :__anti-forgery-token)))
 
 (defn delete [id]
   (jdbc/delete! (db/db-connection) :offers ["id = ?" id]))
