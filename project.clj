@@ -9,6 +9,8 @@
                  [mysql/mysql-connector-java "5.1.38"]
                  [com.jolbox/bonecp "0.8.0.RELEASE"]
                  
+                 [cheshire "5.5.0"]
+                 
                  ;;html5
                  [hiccup "1.0.5"]
                  

@@ -1,6 +1,8 @@
 (ns sober-adnetwork.views.layout
   (:use [hiccup.page :refer :all])
   (:require [noir.session :as session]
+            [hiccup.form :as f]
+            [noir.util.anti-forgery :as anti-forgery]
             ))
 
 (defn home-base [title & content]
@@ -30,14 +32,44 @@
      [:meta {:name "description", :content "a network of publisher and advertiser"}] 
      [:meta {:name "author", :content "albert"}]
      [:title (format "sober-adnetwork:%s" title)]
-     (include-css "/css/bootstrap.min.css" "/css/bootstrap-theme.min.css" "/css/sober-admin.css")
+     (include-css "/css/bootstrap.min.css" "/css/bootstrap-theme.min.css" "/css/bootstrap-switch.min.css" "/css/sober-admin.css")
      (include-js "/js/json2.js" "/js/xpath.js" "/js/Chart.js")]
     [:body content
      [:div {:class "container"}
       [:hr {}] 
       [:footer {} 
        [:p {} "©2016 cia.im"]]]
-     (include-js "/js/jquery.js" "/js/bootstrap.min.js" "/js/sober.js")]))
+     ;; 统一设置审核窗口
+     [:div {:class "modal fade" :id "reviewModal" :tabindex "-1" :role "dialog" :aria-labelledby "reviewModalLabel"}
+      [:div {:class "modal-dialog" :role "document"} 
+       [:div {:class "modal-content"}
+        [:div {:class "modal-header"}
+         [:button {:type "button" :class "close" :data-dismiss "modal" :aria-label "Close"} [:span {:aria-hidden "true"} "&times;"]]
+         [:h4 {:class "modal-title" :id "reviewModalLabel"} "管理员审核"]
+         ]
+        [:div {:class "modal-body"}
+         [:form {:id "review-form" :method "POST"}
+	         (anti-forgery/anti-forgery-field)
+           [:div {:class "form-group"}
+	               (f/label {:class "control-label"} "review-status" "审核结果：")
+                 [:div {} 
+                   [:lable {:class "radio-inline" :for "review_status_1"} 
+                    [:input {:type "radio" :name "status" :value "1" :id "review_status_1" :checked "checked"}] "同意"]
+                   [:lable {:class "radio-inline" :for "review_status_2"} 
+                    [:input {:type "radio" :name "status" :value "2" :id "review_status_2"}] "驳回"]
+                   ]]
+           [:div {:class "form-group"}
+	               (f/label {:class "control-label" :for "replay-name"} "replay-label" "审核意见:")
+	               (f/text-area {:rows 3 :class "form-control" :id "review-textarea" :required "required"} "replay")]
+           [:div {:class "modal-footer"}
+		          [:button {:type "button" :class "btn btn-default" :data-dismiss "modal"} "关闭"]
+		          (f/submit-button {:class "btn btn-primary"} "提 交")]
+          ];form end
+         ];modal body end
+        ]
+       ]
+      ]
+     (include-js "/js/jquery.js" "/js/bootstrap.min.js" "/js/bootstrap-switch.min.js" "/js/sober.js")]))
 
 ;;用户登录之后的导航栏
 (defn nav-bar 

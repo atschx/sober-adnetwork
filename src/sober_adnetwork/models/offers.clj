@@ -14,3 +14,9 @@
 (defn offer-list [advertiser_id]
   (jdbc/query (db/db-connection) 
               ["select * from offers where advertiser_id = ? order by id " advertiser_id]))
+
+(defn admin-offer-list []
+  (jdbc/query (db/db-connection) 
+              ["select * from offers order by id "]))
+
+

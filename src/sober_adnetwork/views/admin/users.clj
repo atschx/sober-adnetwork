@@ -7,6 +7,9 @@
     [hiccup.core :refer (html)]
     [hiccup.form :as f]
     [noir.util.anti-forgery :as anti-forgery]
+    
+    ;;
+    [cheshire.core :refer :all]
     ))
 
 (defn user-table-item [user]
@@ -18,30 +21,31 @@
         status (:status user)
         enable (:enable user)
         updated_at (:updated_at user)]
-     [:tr {} 
+     [:tr {}
           [:td {} id]
           [:td {} name]
           [:td {} slug]
           [:td {} email]
           [:td {} qq]
-          [:td {}
-           ;;逻辑 判定
-           [:span {:class "label label-warning"} (str "等待审核[" status "]")]
+          [:td {:class (condp = status "0" "warning" "1" "success" "2" "danger" "info" )}
+          (condp = status
+				      "0" [:span {:class "label label-warning"} (str "等待审核[" status "]")]
+				      "1" [:span {:class "label label-success"} (str "已审核通过[" status "]")]
+				      "2" [:span {:class "label label-danger"} (str "已驳回申请[" status "]")])
            ]
           [:td {} 
-           enable
-           [:div {:class "btn-group btn-group-xs" :data-toggle "buttons"} 
-            [:label {:class "btn btn-primary active"}
-             [:input {:type "radio" :name "options" :id "option1" :autocomplete "off"} "启用"]
-             ]
-            [:label {:class "btn btn-primary"}
-             [:input {:type "radio" :name "options" :id "option1" :autocomplete "off"} "禁用"]
-             ]
-            ]
+           [:input {:class "" :type "checkbox" :name "user-enable-checkbox" :checked "checked"}]
            ]
           [:td {} updated_at]
           [:td {} 
            [:a {:href (str "/user/" id "/edit") :class "btn btn-info btn-xs" :role "button"} "编辑" ]
+           [:button {:type "button" :class "btn btn-primary btn-xs" :data-toggle "modal" :data-target "#reviewModal"  
+                     :data-whatever (generate-string 
+                                      {:action "/review/user"
+                                       :review_target id
+                                       :review_text   (format "%s(%s)" name id)
+                                       })  
+                     } "审核"]
            [:a {:href (str "/user/" id "/delete") :class "btn btn-danger btn-xs" :role "button"} "删除" ]
            ]
           ]))
@@ -66,8 +70,8 @@
           [:th {} "昵称"]
           [:th {} "邮箱"]
           [:th {} "QQ"]
+          [:th {} "审核状态"]
           [:th {} "账号状态"]
-          [:th {} "启用状态"]
           [:th {} "最后更新"]
           [:th {} "更多操作"]
           ]

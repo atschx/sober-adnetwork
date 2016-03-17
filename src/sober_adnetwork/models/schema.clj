@@ -3,7 +3,6 @@
     [sober-adnetwork.models.db :as db] 
     [clojure.java.jdbc :as jdbc]))
 
-
 (defn create-users
   "create a user table to store advertiser/publisher of the adnetwork "
   []
@@ -18,7 +17,9 @@
     [:mobile "varchar(18)"]
     [:qq "varchar(15)"]
     [:status "varchar(20) NOT NULL DEFAULT 0 COMMENT '申请状态：0.apending 1.approved 2.rejected'"]
+    [:replay :text "COMMENT '管理员回复信息，多用于审核用户时添加处理信息'"]
     [:enable "tinyint(1) NOT NULL DEFAULT 0 COMMENT '账号可用状态 1.可用 0.不可用'"]
+    [:admin "tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否为管理员 1.是 0.否'"]
     [:fiscal_status "tinyint NOT NULL DEFAULT 1 COMMENT '账务属性：0.公司，1.个人'"]
     [:incharge "int COMMENT '负责人(用户账号分管)' "]
     [:created_by "int"]
@@ -42,7 +43,7 @@
     [:eff_desc :text "NOT NULL COMMENT '广告主自行添加的 offer 有效定义'"]
     [:status "tinyint" "NOT NULL DEFAULT 0 COMMENT '当前offer状态 0.apending 1.approved 2.rejected'"]
     [:enable "tinyint(1) NOT NULL DEFAULT 1 COMMENT '可用状态 1.可用 0.不可用'"]
-    [:advertiser_id "bigint(21)" "NOT NULL" "COMMENT '创建该 offer 的广告主'"]
+    [:advertiser_id "int" "NOT NULL" "COMMENT '创建该 offer 的广告主'"]
     [:replay :text "COMMENT '管理员回复信息，多用于禁用 offer 时添加说明'"]
     [:created_by "int"]
     [:created_at "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP"]
@@ -60,7 +61,8 @@
     [:offer_id "bigint(21) NOT NULL"]
     [:publisher_id "int NOT NULL" "COMMENT '申请该 offer 的流量主'"]
     [:status "tinyint" "NOT NULL DEFAULT 0 COMMENT '当前offer状态 0.apending 1.approved 2.rejected'"]
-    [:replay :text "COMMENT '驳回 offer申请时添加说明'"]
+    [:remark :text "COMMENT '提交 offer申请时 流量主补充渠道及量信息'"]
+    [:replay :text "COMMENT '驳回申请时 管理员添加回复说明'"]
     [:enable "tinyint(1) NOT NULL DEFAULT 1 COMMENT '可用状态 1.可用 0.不可用'"]
     [:created_by "int"]
     [:created_at "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP"]
@@ -90,6 +92,7 @@
         db-connection
         (create-users)
         (create-offers)
+        (create-offer-attchments)
         (create-offer-apply-list)))
 
 (defn drop-schema-adnetwork
@@ -109,11 +112,7 @@
   (jdbc/insert! 
      db-connection
      :users
-     [:first_name :last_name :email :mobile :incharge :created_by :updated_by]
-     ["admin" "admin" "admin@atschx.com" "13800000000" nil 10000 10000]
-     ["admin" "admin" "admin@atschx.com" "13800000000" nil 10000 10000]
-     ["admin" "admin" "admin@atschx.com" "13800000000" nil 10000 10000]
-     ["admin" "admin" "admin@atschx.com" "13800000000" nil 10000 10000]
-     ["admin" "admin" "admin@atschx.com" "13800000000" nil 10000 10000]
-     ["admin" "admin" "admin@atschx.com" "13800000000" nil 10000 10000]
-     ["albert" "sun" "atschx@gmail.com" "1580000000" 10000 10001 10001]))
+     [:first_name :last_name :email :password :mobile :enable :status :admin]
+     ;demo@demo.com demo123
+     ["Albert" "Sun" "demo@demo.com" "$s0$e0801$uV7FQriKhFm2yYjFnlv0IA==$Q3uabSA6Bf4tjPm5eiWvCgnmP8orqSNbtAkmFu2uRgQ=" "13800000000" "1" "1" "1"]
+))
