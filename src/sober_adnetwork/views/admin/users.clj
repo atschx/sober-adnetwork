@@ -38,7 +38,6 @@
            ]
           [:td {} updated_at]
           [:td {} 
-           [:a {:href (str "/user/" id "/edit") :class "btn btn-info btn-xs" :role "button"} "编辑" ]
            [:button {:type "button" :class "btn btn-primary btn-xs" :data-toggle "modal" :data-target "#reviewModal"  
                      :data-whatever (generate-string 
                                       {:action "/review/user"
@@ -46,7 +45,6 @@
                                        :review_text   (format "%s(%s)" name id)
                                        })  
                      } "审核"]
-           [:a {:href (str "/user/" id "/delete") :class "btn btn-danger btn-xs" :role "button"} "删除" ]
            ]
           ]))
 

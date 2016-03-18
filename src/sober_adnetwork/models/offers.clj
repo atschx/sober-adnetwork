@@ -19,4 +19,12 @@
   (jdbc/query (db/db-connection) 
               ["select * from offers order by id "]))
 
+(defn update-offer [offer]
+  (log/info offer)
+  (let [res (jdbc/update! (db/db-connection) 
+                          :offers offer
+                          ["id = ?" (:id offer)])]
+    (when-not (= res [1])
+      (throw (Exception.  "DB Update has not succeeded")))))
+
 

@@ -17,6 +17,25 @@ $.fn.bootstrapSwitch.defaults.size = 'mini';
 $.fn.bootstrapSwitch.defaults.onColor = 'success';
 $("[name='user-enable-checkbox']").bootstrapSwitch();
 
+// apply modal init
+$('#applyModal').on('show.bs.modal', function(event) {
+	var button = $(event.relatedTarget);
+	var datajson = button.data('whatever');
+	
+	var modal = $(this)
+	modal.find('.modal-title').text('流量主申请 Offer:' + datajson.apply_text)
+	
+	$("#apply-form").attr("action", datajson.action);
+	
+	var hidden_filed="<input type='hidden' name='id' value='" +  datajson.apply_target + "'>";
+	$("#apply-form").append(hidden_filed);
+})
+
+$('#applyModal').on('shown.bs.modal', function() {
+	$('#apply-remark').focus();
+})
+
+// review modal init
 $('#reviewModal').on('show.bs.modal', function(event) {
 	var button = $(event.relatedTarget);
 	var datajson = button.data('whatever');
@@ -36,5 +55,5 @@ $('#reviewModal').on('show.bs.modal', function(event) {
 })
 
 $('#reviewModal').on('shown.bs.modal', function() {
-	$('#review-textarea').focus();
+	$('#review-replay').focus();
 })

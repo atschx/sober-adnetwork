@@ -58,7 +58,6 @@
       [:button {:type "button" :class "btn btn-default btn-sm" :id "addOffer"}
        [:span {:class "glyphicon glyphicon-plus" :aria-hidden "true"} "新建"]]
       ]
-     [:br]
      [:div {:class "row"}
       [:div {:class "span12"}
        [:table {:class "table table-striped table-hover table-bordered "}

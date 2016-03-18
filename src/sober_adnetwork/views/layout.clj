@@ -39,7 +39,8 @@
       [:hr {}] 
       [:footer {} 
        [:p {} "©2016 cia.im"]]]
-     ;; 统一设置审核窗口
+     
+     ;; 审核模态窗口
      [:div {:class "modal fade" :id "reviewModal" :tabindex "-1" :role "dialog" :aria-labelledby "reviewModalLabel"}
       [:div {:class "modal-dialog" :role "document"} 
        [:div {:class "modal-content"}
@@ -59,11 +60,34 @@
                     [:input {:type "radio" :name "status" :value "2" :id "review_status_2"}] "驳回"]
                    ]]
            [:div {:class "form-group"}
-	               (f/label {:class "control-label" :for "replay-name"} "replay-label" "审核意见:")
-	               (f/text-area {:rows 3 :class "form-control" :id "review-textarea" :required "required"} "replay")]
+	               (f/label {:class "control-label" :for "review-replay"} "replay-label" "审核意见:")
+	               (f/text-area {:rows 3 :class "form-control" :id "review-replay" :required "required"} "replay")]
            [:div {:class "modal-footer"}
 		          [:button {:type "button" :class "btn btn-default" :data-dismiss "modal"} "关闭"]
 		          (f/submit-button {:class "btn btn-primary"} "提 交")]
+          ];form end
+         ];modal body end
+        ]
+       ]
+      ]
+     
+     ;; 申请模态窗口
+     [:div {:class "modal fade" :id "applyModal" :tabindex "-1" :role "dialog" :aria-labelledby "applyModalLabel"}
+      [:div {:class "modal-dialog" :role "document"} 
+       [:div {:class "modal-content"}
+        [:div {:class "modal-header"}
+         [:button {:type "button" :class "close" :data-dismiss "modal" :aria-label "Close"} [:span {:aria-hidden "true"} "&times;"]]
+         [:h4 {:class "modal-title" :id "applyModalLabel"} "申请："]
+         ]
+        [:div {:class "modal-body"}
+         [:form {:id "apply-form" :method "POST"}
+	         (anti-forgery/anti-forgery-field)
+           [:div {:class "form-group"}
+	               (f/label {:class "control-label" :for "apply-remark"} "apply-remark-label" "申请备注:")
+	               (f/text-area {:rows 5 :class "form-control" :id "apply-remark" :required "required" :placeholder "此处填写凭啥你来申请"} "remark")]
+           [:div {:class "modal-footer"}
+		          [:button {:type "button" :class "btn btn-default" :data-dismiss "modal"} "关闭"]
+		          (f/submit-button {:class "btn btn-primary"} "提交申请")]
           ];form end
          ];modal body end
         ]
@@ -95,7 +119,8 @@
         "管理后台" [:span {:class "caret"}] ]
        [:ul {:class "dropdown-menu"}
         [:li {} [:a {:href "/users"} "用户管理"]]
-        [:li {} [:a {:href "/offers"} "offer审核"]]
+        [:li {} [:a {:href "/offers"} "审核 Offer"]]
+        [:li {} [:a {:href "/apply-list"} "审核 apply-list"]]
         [:li {} [:a {:href "/settings"} "系统设置"]]
         ]]
       ]
