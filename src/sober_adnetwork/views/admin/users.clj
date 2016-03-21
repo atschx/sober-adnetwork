@@ -78,6 +78,18 @@
          (map #(user-table-item %) (users/user-list))
          ]
         ]]]
+     
+    [:nav {}
+     [:ul {:class "pagination"} 
+      [:li {}[:a {:href "#" :aria-label "Previous" }[:span {:aria-hidden "true"} "&laquo;"]]]
+      [:li {} [:a {:href "#" } 1]]
+      [:li {} [:a {:href "#" } 2]]
+      [:li {} [:a {:href "#" } 3]]
+      [:li {} [:a {:href "#" } 4]]
+      [:li {}[:a {:href "#" :aria-label "Next" }[:span {:aria-hidden "true"} "&raquo;"]]]
+      ]
+     ];nav close
+    
      ]
 ;    (include-js "/js/chartpage.js"))
   ))
@@ -102,26 +114,27 @@
                      [:post "save"]
                      (anti-forgery/anti-forgery-field)
                      [:div {:class "form-group"}
-                      (f/label {:class "col-sm-2 control-label"} "email" "E-mail")
-                      [:div {:class "col-sm-10"} (f/email-field {:class "form-control"} "email" (:email user))]]
+                      (f/label {:class "col-sm-2 control-label"} "first_name" "名")
+                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control" :placeholder "Firstname"} "first_name" (:first_name user))]]
+                     [:div {:class "form-group"}
+                      (f/label {:class "col-sm-2 control-label"} "last_name" "姓")
+                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control" :placeholder "Lastname"} "last_name" (:last_name user))]]
+                     [:div {:class "form-group"}
+                      (f/label {:class "col-sm-2 control-label"} "slug" "昵称")
+                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control" :placeholder "Slug"} "slug" (:slug user))]]
+                     [:div {:class "form-group"}
+                      (f/label {:class "col-sm-2 control-label"} "email" "邮箱")
+                      [:div {:class "col-sm-10"} (f/email-field {:class "form-control" :placeholder "Email"} "email" (:email user))]]
                      [:div {:class "form-group"}
                       (f/label {:class "col-sm-2 control-label"} "qq" "QQ 号")
-                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control"} "qq" (:qq user))]]
-                     [:div {:class "form-group"}
-                      (f/label {:class "col-sm-2 control-label"} "slug" "Slug")
-                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control"} "slug" (:slug user))]]
+                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control" :placeholder "QQ"} "qq" (:qq user))]]
                      [:div {:class "form-group"}
                       (f/label {:class "col-sm-2 control-label"} "mobile" "手机号")
-                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control"} "mobile" (:mobile user))]]
-                     [:div {:class "form-group"}
-                      (f/label {:class "col-sm-2 control-label"} "first_name" "Firstname")
-                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control"} "first_name" (:first_name user))]]
-                     [:div {:class "form-group"}
-                      (f/label {:class "col-sm-2 control-label"} "last_name" "Lastname")
-                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control"} "last_name" (:last_name user))]]
+                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control" :placeholder "Phone Number"} "mobile" (:mobile user))]]
                      [:div {:class "form-group"}
                       [:div {:class "col-sm-offset-2 col-sm-10"}
                      (f/submit-button {:class "btn btn-primary"} "保 存")]]
                      )
-          ))]]]
+          ))]]
+    ]
    ))

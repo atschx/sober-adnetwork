@@ -22,10 +22,8 @@
 (defn list []
   (jdbc/query (db/db-connection) 
               ["select a.*,b.name, b.price, b.price_model, b.clearing_cycle 
-								from offer_apply_list a,offers b 
-								where 
-								 a.offer_id = b.id 
-								order by a.id "]))
+								from offer_apply_list a,offers b  where a.offer_id = b.id 
+								order by a.status , a.id"]))
 
 ;; 更新申请数据
 (defn update-apply-list [apply-list]
