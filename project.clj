@@ -30,6 +30,8 @@
   :ring {:handler sober-adnetwork.handler/app
          :init sober-adnetwork.handler/init
          :destroy sober-adnetwork.handler/destroy}
+  :jvm-opts ["-Djava.awt.headless=true" 
+             "-Xmx1g"]
   :profiles
   {:uberjar {:aot :all}
    :production
