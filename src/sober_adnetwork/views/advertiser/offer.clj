@@ -31,9 +31,11 @@
            [:span {:class "label label-info"} price_model]
            ]
           [:td {} clearing_cycle]
-          [:td {}
-           ;;逻辑 判定
-           [:span {:class "label label-warning"} (str "等待审核[" status "]")]
+          [:td  {:class (condp = status 0 "warning" 1 "success" 2 "danger" "info" )}
+          (condp = status
+				      0 [:span {:class "label label-warning"} (str "等待审核[" status "]")]
+				      1 [:span {:class "label label-success"} (str "已审核通过[" status "]")]
+				      2 [:span {:class "label label-danger"} (str "已驳回申请[" status "]")])
            ]
           [:td {} replay]
           [:td {} eff_desc]
