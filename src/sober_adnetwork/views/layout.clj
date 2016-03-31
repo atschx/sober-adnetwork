@@ -5,6 +5,7 @@
             [noir.util.anti-forgery :as anti-forgery]
             ))
 
+;; 首页使用
 (defn home-base [title & content]
   (html5
     [:head
@@ -21,8 +22,9 @@
       [:hr {}] 
       [:footer {} 
        [:p {} "©2016 cia.im"]]]
-     (include-js "/js/jquery.js" "/js/bootstrap.min.js" "/js/sober.js")]))
+     (include-js "/js/vendor/jquery.js" "/js/bootstrap.min.js" "/js/sober.js")]))
 
+;; 列表页使用
 (defn common [title & content]
   (html5
     [:head
@@ -93,7 +95,49 @@
         ]
        ]
       ]
-     (include-js "/js/jquery.js" "/js/bootstrap.min.js" "/js/bootstrap-switch.min.js" "/js/sober.js")]))
+     (include-js "/js/vendor/jquery.js" "/js/bootstrap.min.js" "/js/bootstrap-switch.min.js" "/js/sober.js")]))
+
+(defn upload-page-common 
+  "带上传功能的页面基于此模版构建页面"
+  [title & content]
+  (html5
+    [:head
+     [:meta {:charset "utf-8"}]
+     [:meta {:http-equiv "X-UA-Compatible", :content "IE=edge"}]
+     [:meta {:name "viewport", :content "width=device-width, initial-scale=1"}]
+     [:meta {:name "description", :content "a network of publisher and advertiser"}] 
+     [:meta {:name "author", :content "albert"}]
+     [:title (format "sober-adnetwork:%s" title)]
+     (include-css "/css/bootstrap.min.css" 
+                  "/css/bootstrap-theme.min.css" 
+                  "/css/sober.css"
+                  "/css/plugins/blueimp-gallery.min.css"
+                  "/css/plugins/jquery.fileupload.css"
+                  "/css/plugins/jquery.fileupload-ui.css"
+                  )]
+    [:body content
+     [:div {:class "container"}
+      [:hr {}] 
+      [:footer {} 
+       [:p {} "©2016 cia.im"]]]
+     (include-js "/js/vendor/jquery.js" 
+                 "/js/vendor/jquery.ui.widget.js" 
+                 "/js/plugins/tmpl.min.js"
+                 "/js/plugins/load-image.all.min.js"
+                 "/js/plugins/canvas-to-blob.min.js"
+                 "/js/bootstrap.min.js" 
+                 "/js/plugins/jquery.blueimp-gallery.min.js"
+                 "/js/plugins/jquery.iframe-transport.js"
+                 "/js/plugins/jquery.fileupload.js"
+                 "/js/plugins/jquery.fileupload-process.js"
+                 "/js/plugins/jquery.fileupload-image.js"
+                 "/js/plugins/jquery.fileupload-audio.js"
+                 "/js/plugins/jquery.fileupload-video.js"
+                 "/js/plugins/jquery.fileupload-validate.js"
+                 "/js/plugins/jquery.fileupload-ui.js"
+                 "/js/main.js"
+;                 "/js/sober.js"
+                 )]))
 
 ;;用户登录之后的导航栏
 (defn nav-bar 
@@ -163,6 +207,7 @@
       [:li {} [:a {:href "/signup"} "注册"]]]
      ]]]
   )
+
 
 
 (defn pagenation []

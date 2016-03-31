@@ -42,6 +42,9 @@
           [:td {} updated_at]
           [:td {} 
            [:a {:href (str "/offer/" id "/delete") :class "btn btn-danger btn-xs" :role "button"} "删除" ]
+           
+           [:a {:href (str "/offer/" id "/upload") :class "btn btn-info btn-xs" :role "button"} "上传相关资源" ]
+           
           ]
           ]))  
 
@@ -139,3 +142,48 @@
            )]]
      ])
   )
+
+;; 附件上传界面
+(defn upload-attch [id] 
+  (layout/upload-page-common "upload attchment" 
+    (layout/nav-bar)
+    [:div {:class "container"}
+     [:div {:class "row"} 
+      [:div {:class "span12"} 
+			    [:div {:class "page-header"}
+				    [:h2 "上传 Offer 附件资源"]
+			    ]
+		    ]]
+     [:div {:class "row fileupload-buttonbar"}
+      [:form {:id "fileupload" :action (str "/offer/" id "/upload") :method "post" :enctype "multipart/form-data"}
+       [:div {:class "row" } 
+        [:div {:class "col-lg-7"}
+         (anti-forgery/anti-forgery-field)
+         [:span {:class "btn btn-success fileinput-button"} 
+          [:i {:class "glyphicon glyphicon-plus"} ]
+          [:span {} "添加文件"]
+          [:input {:name "files" :type "file" :size "20" :multiple "multiple"}]
+          ]
+
+         [:button {:type "submit" :class "btn btn-primary start"} 
+          [:i {:class "glyphicon glyphicon-upload"} 
+           [:span {} "开始上传"]]]
+
+         [:button {:type "reset" :class "btn btn-warning cancel"} 
+          [:i {:class "glyphicon glyphicon-ban-circle"} 
+           [:span {} "取消上传"]]]
+
+         [:button {:type "button" :class "btn btn-danger delete"} 
+          [:i {:class "glyphicon glyphicon-trash"} 
+           [:span {} "删除"]]]
+         ]
+        [:div {:class "col-lg-5 fileupload-progress fade"} 
+         [:div {:class "progress progress-striped active" :role "progressbar" :aria-valuemin "0" :aria-valuemax "100"} 
+          [:div {:class "progress-bar progress-bar-success" :style "width:0%;"} ] 
+          ]
+         [:div {:class "progress-extended"} "&nbsp;"]
+         ]
+        ]
+       [:table {:role "presentation" :class "table table-striped"} [:tbody {:class "files"} ]]
+      ]]
+     ]))

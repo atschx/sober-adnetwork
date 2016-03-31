@@ -22,6 +22,8 @@
                  [ring-basic-authentication "1.0.5"]
 ;                 [com.cemerick/friend "0.2.1"]
                  [lib-noir "0.9.9"]
+                 
+                 [pandect "0.5.4"]
                  ;;log4j
                  [org.slf4j/slf4j-log4j12 "1.7.2"]
                  [log4j/log4j "1.2.17"]]

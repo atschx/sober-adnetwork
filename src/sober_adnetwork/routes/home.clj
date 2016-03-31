@@ -17,7 +17,3 @@
 
 (defroutes home-routes
   (GET "/" [] (home)))
-
-
-
-
