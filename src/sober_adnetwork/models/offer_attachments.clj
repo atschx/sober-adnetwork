@@ -25,7 +25,7 @@
     (println checksum)
     (create  {:name filename 
               :store_path filename
-              :short_url 
+              :short_url filename
               :offer_id offer_id
               :checksum checksum
                 })
