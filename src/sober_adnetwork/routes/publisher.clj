@@ -41,5 +41,12 @@
   (GET "/apply-list/:id/delete" [id]
      (do (apply-list/delete id)
        (resp/redirect "/publisher")))
-   
+  
+  ;; 流量主查看申请的offer详情（包括该 offer 下的资源）
+;  "/apply-list/" id "/detail"
+  (GET "/apply-list/:id/detail" [id] 
+       (my-apply/apply-detail id))
+  
   )
+   
+ 

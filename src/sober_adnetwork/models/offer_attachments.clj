@@ -14,6 +14,7 @@
   (jdbc/insert! (db/db-connection) :offer_attchments (dissoc params :__anti-forgery-token)))
 
 (defn restore-attachements
+  "附件信息转存，生成对应的校验码"
   [attch]
   (let [
         offer_id (:offer_id attch)

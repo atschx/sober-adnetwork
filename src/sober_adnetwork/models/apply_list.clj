@@ -37,3 +37,12 @@
 ;; 申请人取消申请
 (defn delete [id]
   (jdbc/delete! (db/db-connection) :offer_apply_list ["id = ?" id]))
+
+;; 查看指定申请的 offer 详情
+(defn apply_list_detail [id] 
+  (jdbc/query (db/db-connection) ["select a.*,b.name, b.price, b.price_model, b.clearing_cycle 
+								from offer_apply_list a,offers b
+								where 
+								 a.offer_id = b.id 
+								and 
+								a.id = ? " id]))

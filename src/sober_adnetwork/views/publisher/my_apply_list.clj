@@ -33,6 +33,22 @@
 ;    "created_by": 10001,
 ;    "created_at": "2016-03-18T07:29:03Z"
 
+
+;; 映射为对应的详情页面(如果状态为已经审核通过则直接显示下载地址)
+(defn apply-detail-page [apply-details]
+  (let [id (:id apply-details)
+        desc (format "%s-%s-%s-%s" 
+                     (:name apply-details) 
+                     (:price apply-details) 
+                     (:price_model apply-details) 
+                     (:clearing_cycle apply-details))
+        status (:status apply-details)
+        remark (:remark apply-details)
+        replay (:replay apply-details)
+        updated_at (:updated_at apply-details)]
+    [:div desc]
+  ))
+
 (defn apply-table-item [apply-details]
   (let [id (:id apply-details)
         desc (format "%s-%s-%s-%s" 
@@ -94,4 +110,22 @@
         ]]]
      ]
     ))
+
+(defn apply-detail [apply_id]
+  (layout/common (str "申请详情:" apply_id)
+                 (layout/nav-bar)
+                 [:div {:class "container"}
+                  [:div {:class "row"}
+                    [:div {:class "span12"} 
+                     [:div {:class "page-header"}
+                      [:h2 (str "申请序号[" apply_id "]详情信息" )]
+                     ]
+                    ]]
+                  ;; 
+                  [:div {:class "row"}
+;                   [:div {:class "span12"}] 
+                   (apply-detail-page (first (apply-list/apply_list_detail apply_id)))
+                   ]
+                  ]))
+
 
