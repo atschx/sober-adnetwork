@@ -35,3 +35,13 @@
       (io/file filename))
     )
   )
+
+; 获取下载地址列表
+(defn offer-attachements-list [offer_id]
+  (jdbc/query (db/db-connection) ["select * from offer_attchments where offer_id = ? " offer_id]))
+
+
+
+
+
+

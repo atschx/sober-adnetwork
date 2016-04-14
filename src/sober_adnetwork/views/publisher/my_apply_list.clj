@@ -59,6 +59,7 @@
         status (:status apply-details)
         remark (:remark apply-details)
         replay (:replay apply-details)
+        offer_id (:offer_id apply-details)
         updated_at (:updated_at apply-details)]
      [:tr {} 
           [:td {} 
@@ -75,6 +76,7 @@
           [:td {} updated_at]
           [:td {} 
            [:a {:href (str "/apply-list/" id "/delete") :class "btn btn-danger btn-xs" :role "button"} "取消申请" ]
+           [:a {:href (str "/offer/" offer_id "/attchments") :class "btn btn-info btn-xs" :role "button"} "获取资源" ]
           ]
           ]))  
 

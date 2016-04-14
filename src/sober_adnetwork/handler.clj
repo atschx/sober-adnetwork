@@ -17,6 +17,7 @@
              [dashboard :refer [dashboard-routes]]
              [advertiser :refer [advertiser-routes]]
              [publisher :refer [publisher-routes]]
+             [offers :refer [offer-routes]]
              [admin :refer [admin-routes]]
              ]))
 
@@ -36,6 +37,7 @@
 					  dashboard-routes
 					  advertiser-routes
 					  publisher-routes
+            offer-routes
 					  admin-routes
             app-routes]
            ))

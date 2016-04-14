@@ -1,0 +1,4 @@
+(use 'sober-adnetwork.models.db)
+(use 'sober-adnetwork.models.schema)
+(create-schema-adnetwork db-connection)
+(create-schema-adnetwork (db-connection))
