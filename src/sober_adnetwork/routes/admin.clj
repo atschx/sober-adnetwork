@@ -33,9 +33,7 @@
 (defroutes admin-routes
   
   ;; 联系客服
-  (GET "/:id/contact/us" [id] 
-       (users/user-edit id)
-       )
+  (GET "/contact/:id/view" [id] (users/contact-us id))
   
   ;;; 用户管理
   (GET "/users" [] (users/user-list))

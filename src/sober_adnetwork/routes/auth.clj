@@ -63,7 +63,8 @@
   (let [user (u/get-user-by-email email)] 
     (if (and user (crypt/compare pass (:password user)))
       (do 
-        (session/put! :uid (:id user))
+        (session/put! :uid (:id user) )
+        (session/put! :incharge (:incharge user))
         (resp/redirect "/dashboard"))
       (resp/redirect "/signin")
     )))

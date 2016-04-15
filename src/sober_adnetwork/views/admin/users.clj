@@ -20,7 +20,8 @@
         qq (:qq user)
         status (:status user)
         enable (:enable user)
-        updated_at (:updated_at user)]
+        updated_at (:updated_at user)
+        incharge (:incharge user)]
      [:tr {}
           [:td {} id]
           [:td {} name]
@@ -37,6 +38,7 @@
            [:input {:class "" :type "checkbox" :name "user-enable-checkbox" :checked "checked"}]
            ]
           [:td {} updated_at]
+          [:td {} incharge]
           [:td {} 
            
            ;; 审核用户
@@ -82,6 +84,7 @@
           [:th {} "审核状态"]
           [:th {} "账号状态"]
           [:th {} "最后更新"]
+          [:th {} "所属管理员"]
           [:th {} "更多操作"]
           ]
          ]
@@ -145,6 +148,47 @@
                      [:div {:class "form-group"}
                       [:div {:class "col-sm-offset-2 col-sm-10"}
                      (f/submit-button {:class "btn btn-primary"} "保 存")]]
+                     )
+          ))]]
+    ]
+   ))
+
+;;客服信息
+(defn contact-us [id]
+  (layout/common (str "user[" id "]edit")
+   (layout/nav-bar)
+   [:div {:class "container"}
+    [:div {:class "row"}
+      [:div {:class "span12"} 
+       [:div {:class "page-header"}
+        [:h2 (str "专属客服：[" id "]")]
+       ]
+      ]]
+    [:div {:class "row"}
+      [:div {:class "col-lg-6"}
+      (list
+        (let [user (users/get-user-by-id id)]
+          (f/form-to {:class "form-horizontal" :role "form"} 
+                     [:post "save"]
+                     (anti-forgery/anti-forgery-field)
+                     [:div {:class "form-group"}
+                      (f/label {:class "col-sm-2 control-label"} "first_name" "名")
+                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control" :placeholder "Firstname"} "first_name" (:first_name user))]]
+                     [:div {:class "form-group"}
+                      (f/label {:class "col-sm-2 control-label"} "last_name" "姓")
+                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control" :placeholder "Lastname"} "last_name" (:last_name user))]]
+                     [:div {:class "form-group"}
+                      (f/label {:class "col-sm-2 control-label"} "slug" "昵称")
+                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control" :placeholder "Slug"} "slug" (:slug user))]]
+                     [:div {:class "form-group"}
+                      (f/label {:class "col-sm-2 control-label"} "email" "邮箱")
+                      [:div {:class "col-sm-10"} (f/email-field {:class "form-control" :placeholder "Email"} "email" (:email user))]]
+                     [:div {:class "form-group"}
+                      (f/label {:class "col-sm-2 control-label"} "qq" "QQ 号")
+                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control" :placeholder "QQ"} "qq" (:qq user))]]
+                     [:div {:class "form-group"}
+                      (f/label {:class "col-sm-2 control-label"} "mobile" "手机号")
+                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control" :placeholder "Phone Number"} "mobile" (:mobile user))]]
                      )
           ))]]
     ]

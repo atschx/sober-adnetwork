@@ -196,12 +196,12 @@
       ]
      [:ul {:class "nav navbar-nav pull-right"}
       [:li {:class "dropdown" } 
-       [:a {:class "dropdown-toggle" :href "#" :data-toggle "dropdown" :role "button" :aria-haspopup "true" :aria-expanded "false"} "atschx@gmail.com" [:span {:class "caret"}]]
+       [:a {:class "dropdown-toggle" :href "#" :data-toggle "dropdown" :role "button" :aria-haspopup "true" :aria-expanded "false"} "个人中心" [:span {:class "caret"}]]
        [:ul {:class "dropdown-menu"}
         [:li {} [:a {:href (str "/user/" (session/get :uid) "/edit")} "用户资料"]]
         [:li {} [:a {:href "/logout"} "退出"]]
         ]]
-      [:li {} [:a {:href (str "/" (session/get :uid) "/contact/us")} "联系客服"]]
+      [:li {} [:a {:href (str "/contact/" (session/get :incharge) "/view")} "联系客服"]]
       ]
      ]]]
   )
