@@ -14,7 +14,7 @@
     [noir.session :as session]
     ))
 
-(defn handle-review-user
+(defn handle-update-user
   [params]
   (do (u/update-user (merge params {:updated_by (session/get :uid)}))
       (resp/redirect "/users")))
@@ -53,7 +53,12 @@
   
   ;;; user 审核
   (POST "/review/user" [& params] 
-        (handle-review-user 
+        (handle-update-user 
+          (dissoc params :__anti-forgery-token)))
+  
+  ;;; incharge user
+  (POST "/incharge/user" [& params] 
+        (handle-update-user
           (dissoc params :__anti-forgery-token)))
   
   ;;; offer 审核
