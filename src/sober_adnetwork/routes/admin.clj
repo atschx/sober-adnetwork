@@ -27,6 +27,7 @@
 (defn handle-review-apply-list
   [params]
   (do (apply-list/update-apply-list (merge params {:updated_by (session/get :uid)}))
+      ; 审核通过 
       (resp/redirect "/apply-list")))
 
 (defroutes admin-routes

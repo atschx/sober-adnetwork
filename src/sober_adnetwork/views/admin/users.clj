@@ -38,6 +38,8 @@
            ]
           [:td {} updated_at]
           [:td {} 
+           
+           ;; 审核用户
            [:button {:type "button" :class "btn btn-primary btn-xs" :data-toggle "modal" :data-target "#reviewModal"  
                      :data-whatever (generate-string 
                                       {:action "/review/user"
@@ -47,13 +49,13 @@
                      } "审核"]
            
            ;; 分管用户
-           [:button {:type "button" :class "btn btn-info btn-xs" :data-toggle "modal" :data-target "#reviewModal"  
+           [:button {:type "button" :class "btn btn-info btn-xs" :data-toggle "modal" :data-target "#inchargeModal"  
                      :data-whatever (generate-string 
-                                      {:action "/review/user"
-                                       :review_target id
-                                       :review_text   (format "%s(%s)" name id)
+                                      {:action "/incharge/user"
+                                       :incharge_target id
+                                       :incharge_text   (format "%s(%s)" name id)
                                        })  
-                     } "分管用户"]
+                     } "分配管理员"]
            ]
           ]))
 

@@ -34,6 +34,26 @@ $('#applyModal').on('show.bs.modal', function(event) {
 $('#applyModal').on('shown.bs.modal', function() {
 	$('#apply-remark').focus();
 })
+//inchargeModal
+$('#inchargeModal').on('show.bs.modal', function(event) {
+	
+	var button = $(event.relatedTarget);
+	var datajson = button.data('whatever');
+	
+	var modal = $(this)
+	modal.find('.modal-title').text('待的分管用户：' + datajson.incharge_text)
+	
+	$("#incharge-form").attr("action", datajson.action);
+	
+	//添加隐藏字段 id
+    var hidden_filed="<input type='hidden' name='id' value='" +  datajson.incharge_target + "'>";
+    $("#incharge-form").append(hidden_filed);
+	
+})
+
+$('#inchargeModal').on('shown.bs.modal', function() {
+	$('#incharge-user').focus();
+})
 
 // review modal init
 $('#reviewModal').on('show.bs.modal', function(event) {

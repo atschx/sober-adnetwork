@@ -42,6 +42,30 @@
       [:footer {} 
        [:p {} "©2016 cia.im"]]]
      
+     ;; 用户分管
+     [:div {:class "modal fade" :id "inchargeModal" :tabindex "-1" :role "dialog" :aria-labelledby "inchargeModalLabel"}
+      [:div {:class "modal-dialog" :role "document"} 
+       [:div {:class "modal-content"}
+        [:div {:class "modal-header"}
+         [:button {:type "button" :class "close" :data-dismiss "modal" :aria-label "Close"} [:span {:aria-hidden "true"} "&times;"]]
+         [:h4 {:class "modal-title" :id "inchargeModalLabel"} "用户分管"]
+         ]
+        [:div {:class "modal-body"}
+         [:form {:id "incharge-form" :method "POST"}
+	         (anti-forgery/anti-forgery-field)
+           [:div {:class "form-group"}
+           [:div {:class "form-group"}
+	               (f/label {:class "control-label" :for "user-charge-label"} "user-charge-label" "分管用户:")
+	               (f/text-area {:rows 3 :class "form-control" :id "incharge-user" :required "required"} "incharge")]
+           [:div {:class "modal-footer"}
+		          [:button {:type "button" :class "btn btn-default" :data-dismiss "modal"} "关闭"]
+		          (f/submit-button {:class "btn btn-primary"} "提 交")]
+          ];form end
+         ];modal body end
+        ]
+       ]
+      ]
+     
      ;; 审核模态窗口
      [:div {:class "modal fade" :id "reviewModal" :tabindex "-1" :role "dialog" :aria-labelledby "reviewModalLabel"}
       [:div {:class "modal-dialog" :role "document"} 
