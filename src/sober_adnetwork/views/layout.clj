@@ -201,7 +201,7 @@
         [:li {} [:a {:href (str "/user/" (session/get :uid) "/edit")} "用户资料"]]
         [:li {} [:a {:href "/logout"} "退出"]]
         ]]
-      [:li {} [:a {:href str ("/" (session/get :uid) "/contact/us" )} "联系客服"]]
+      [:li {} [:a {:href (str "/" (session/get :uid) "/contact/us")} "联系客服"]]
       ]
      ]]]
   )
