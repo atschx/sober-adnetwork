@@ -163,9 +163,9 @@
         "管理后台" [:span {:class "caret"}] ]
        [:ul {:class "dropdown-menu"}
         [:li {} [:a {:href "/users"} "用户管理"]]
-        [:li {} [:a {:href "/offers"} "审核 Offer"]]
-        [:li {} [:a {:href "/apply-list"} "审核 apply-list"]]
-        [:li {} [:a {:href "/settings"} "系统设置"]]
+        [:li {} [:a {:href "/offers"} "审核广告主 Offer"]]
+        [:li {} [:a {:href "/apply-list"} "审核流量主 Apply"]]
+;        [:li {} [:a {:href "/settings"} "系统设置"]]
         ]]
       ]
      [:ul {:class "nav navbar-nav pull-right"}
