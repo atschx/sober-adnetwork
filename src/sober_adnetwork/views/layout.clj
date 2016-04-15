@@ -55,8 +55,8 @@
 	         (anti-forgery/anti-forgery-field)
            [:div {:class "form-group"}
            [:div {:class "form-group"}
-	               (f/label {:class "control-label" :for "user-charge-label"} "user-charge-label" "分管用户:")
-	               (f/text-area {:rows 3 :class "form-control" :id "incharge-user" :required "required"} "incharge")]
+	               (f/label {:class "control-label" :for "user-charge-label"} "user-charge-label" "指派给（管理员）:")
+	               (f/text-field {:class "form-control" :id "incharge-user" :required "required"} "incharge")]
            [:div {:class "modal-footer"}
 		          [:button {:type "button" :class "btn btn-default" :data-dismiss "modal"} "关闭"]
 		          (f/submit-button {:class "btn btn-primary"} "提 交")]
@@ -64,7 +64,7 @@
          ];modal body end
         ]
        ]
-      ]
+      ]]
      
      ;; 审核模态窗口
      [:div {:class "modal fade" :id "reviewModal" :tabindex "-1" :role "dialog" :aria-labelledby "reviewModalLabel"}
@@ -119,7 +119,9 @@
         ]
        ]
       ]
-     (include-js "/js/vendor/jquery.js" "/js/bootstrap.min.js" "/js/bootstrap-switch.min.js" "/js/sober.js")]))
+     
+     (include-js "/js/vendor/jquery.js" "/js/bootstrap.min.js" "/js/bootstrap-switch.min.js" "/js/sober.js")
+     ]))
 
 (defn upload-page-common 
   "带上传功能的页面基于此模版构建页面"
