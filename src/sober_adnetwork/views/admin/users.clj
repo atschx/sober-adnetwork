@@ -161,7 +161,8 @@
     [:div {:class "row"}
       [:div {:class "span12"} 
        [:div {:class "page-header"}
-        [:h2 (str "专属客服：[" id "]")]
+        [:h2 (str "专属客服：[" id "]")
+         [:small {} " 有任何疑问可通过以下方式与客服联系"]]
        ]
       ]]
     [:div {:class "row"}
@@ -170,25 +171,18 @@
         (let [user (users/get-user-by-id id)]
           (f/form-to {:class "form-horizontal" :role "form"} 
                      [:post "save"]
-                     (anti-forgery/anti-forgery-field)
-                     [:div {:class "form-group"}
-                      (f/label {:class "col-sm-2 control-label"} "first_name" "名")
-                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control" :placeholder "Firstname"} "first_name" (:first_name user))]]
-                     [:div {:class "form-group"}
-                      (f/label {:class "col-sm-2 control-label"} "last_name" "姓")
-                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control" :placeholder "Lastname"} "last_name" (:last_name user))]]
                      [:div {:class "form-group"}
                       (f/label {:class "col-sm-2 control-label"} "slug" "昵称")
-                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control" :placeholder "Slug"} "slug" (:slug user))]]
+                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control" :placeholder "Slug" :disabled "disabled"} "slug" (:slug user))]]
                      [:div {:class "form-group"}
                       (f/label {:class "col-sm-2 control-label"} "email" "邮箱")
-                      [:div {:class "col-sm-10"} (f/email-field {:class "form-control" :placeholder "Email"} "email" (:email user))]]
+                      [:div {:class "col-sm-10"} (f/label {:class "form-control" } "email" (:email user))]]
                      [:div {:class "form-group"}
                       (f/label {:class "col-sm-2 control-label"} "qq" "QQ 号")
-                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control" :placeholder "QQ"} "qq" (:qq user))]]
+                      [:div {:class "col-sm-10"} (f/label {:class "form-control" } "qq" (:qq user))]]
                      [:div {:class "form-group"}
                       (f/label {:class "col-sm-2 control-label"} "mobile" "手机号")
-                      [:div {:class "col-sm-10"} (f/text-field {:class "form-control" :placeholder "Phone Number"} "mobile" (:mobile user))]]
+                      [:div {:class "col-sm-10"} (f/label {:class "form-control"} "mobile" (:mobile user))]]
                      )
           ))]]
     ]
