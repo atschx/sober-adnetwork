@@ -32,8 +32,14 @@
 
 (defroutes admin-routes
   
+  ;; 联系客服
+  (GET "/:id/contact/us" [id] 
+       (users/user-edit id)
+       )
+  
   ;;; 用户管理
   (GET "/users" [] (users/user-list))
+  
   (GET "/user/:id/delete" [id]
        (do (u/delete id)
          (resp/redirect "/users")))
